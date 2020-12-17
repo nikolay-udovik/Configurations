@@ -3,7 +3,7 @@ global_defs {
     notification_email {
         test@example.com
     }
-    notification_email_from id@domain.com
+    notification_email_from test@example.com
     smtp_server 127.0.0.1
     smtp_connect_timeout 15
 }
@@ -38,7 +38,7 @@ global_defs {
     notification_email {
         test@example.com
     }
-    notification_email_from id@domain.com
+    notification_email_from test@example.com
     smtp_server 127.0.0.1
     smtp_connect_timeout 15
 }
