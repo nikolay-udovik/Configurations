@@ -1,0 +1,67 @@
+Config for master:
+global_defs {
+    notification_email {
+        test@example.com
+    }
+    notification_email_from id@domain.com
+    smtp_server 127.0.0.1
+    smtp_connect_timeout 15
+}
+
+vrrp_instance to-haproxy {
+    state MASTER
+    interface ens35
+    virtual_router_id 51
+    priority 100
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1111
+    }
+    virtual_ipaddress {
+       10.149.149.254 
+    }
+
+    unicast_src_ip 10.149.149.250
+    unicast_peer {
+       10.149.149.251
+    }
+    track_interface {
+       ens33
+       ens35
+    }
+}
+
+Config for backup:
+  
+global_defs {
+    notification_email {
+        test@example.com
+    }
+    notification_email_from id@domain.com
+    smtp_server 127.0.0.1
+    smtp_connect_timeout 15
+}
+vrrp_instance to-haproxy {
+    state BACKUP
+    interface ens35
+    virtual_router_id 51
+    priority 50
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1111
+    }
+    virtual_ipaddress {
+       10.149.149.254 
+    }
+
+    unicast_src_ip 10.149.149.251
+    unicast_peer {
+       10.149.149.250
+    }
+    track_interface {
+       ens33
+       ens35
+    }
+}
